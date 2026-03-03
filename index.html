@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>디지털 명함 - 글래스모피즘 스타일</title>
+    <style>
+        /* 기본 설정 및 다크모드 배경 */
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-color: #38bdf8;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-gradient);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 배경 장식 요소 (은은한 그라데이션 구체) */
+        body::before, body::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+        }
+
+        body::before {
+            width: 300px;
+            height: 300px;
+            background: rgba(56, 189, 248, 0.15);
+            top: 10%;
+            left: 15%;
+        }
+
+        body::after {
+            width: 400px;
+            height: 400px;
+            background: rgba(139, 92, 246, 0.15);
+            bottom: 10%;
+            right: 15%;
+        }
+
+        /* 메인 카드 스타일 (Glassmorphism) */
+        .card {
+            width: 350px;
+            padding: 40px 30px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 호버 효과: 부드럽게 커지고 밝아짐 */
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.7);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* 프로필 이미지 자리 */
+        .profile-img-container {
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-color), #818cf8);
+            padding: 3px;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: var(--text-sub);
+            font-size: 0.85rem;
+        }
+
+        /* 이미지 태그가 실제로 들어갈 경우 사용 */
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 텍스트 스타일링 */
+        .name {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .bio {
+            font-size: 1rem;
+            color: var(--accent-color);
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--glass-border);
+            width: 100%;
+            margin-bottom: 24px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: var(--text-main);
+        }
+
+        .email-icon {
+            fill: currentColor;
+            width: 18px;
+            height: 18px;
+        }
+
+        /* 버튼 스타일 */
+        .action-button {
+            margin-top: 30px;
+            padding: 12px 24px;
+            background: var(--text-main);
+            color: #0f172a;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .action-button:active {
+            transform: scale(0.95);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- 프로필 이미지 -->
+        <div class="profile-img-container">
+            <div class="profile-img">
+                <img src="./profile.png" alt="내 이미지">
+            </div>
+        </div>
+
+        <!-- 사용자 정보 -->
+        <h1 class="name">김경원 (Kim kyung won)</h1>
+        <p class="bio">더 나은 세상을 만드는 프론트엔드 개발자</p>
+
+        <div class="divider"></div>
+
+        <!-- 연락처 정보 -->
+        <div class="contact-info">
+            <a href="mailto:kimkw4784@gmail.com" class="contact-item">
+                <svg class="email-icon" viewBox="0 0 24 24">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+                kimkw4784@gmail.com
+            </a>
+        </div>
+
+        <button class="action-button" onclick="copyToClipboard('kimkw4784@gmail.com')">연락처 복사하기</button>
+    </div>
+
+    <script>
+        function copyToClipboard(text) {
+            const tempInput = document.createElement("input");
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            
+            // 간단한 피드백 효과
+            const btn = document.querySelector('.action-button');
+            const originalText = btn.innerText;
+            btn.innerText = '복사 완료!';
+            btn.style.background = '#10b981';
+            btn.style.color = '#fff';
+            
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.background = '#f8fafc';
+                btn.style.color = '#0f172a';
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>
